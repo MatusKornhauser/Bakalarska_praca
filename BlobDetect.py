@@ -3,7 +3,7 @@ import cv2
 
 
 def blobDetection():                                    #metoda hladania podla kruhov
-    image = cv2.imread("Radon_/Image_1A.bmp")                       #nacitanie jedneho obrazka
+    image = cv2.imread("Radon_/Image_1A.bmp")                       #cesta na nacitanie jedneho obrazka
 
     params = cv2.SimpleBlobDetector_Params()                #parametre daneho kruhu
                                                             #maska

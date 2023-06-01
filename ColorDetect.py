@@ -3,7 +3,7 @@ import cv2
 
 
 def colorDetect():
-    image = cv2.imread("Radon_/Image_1A.bmp")                       #hladanie pomocou farby, nacitranie jedneho obrázka
+    image = cv2.imread("Radon_/Image_1A.bmp")                       #hladanie pomocou farby, cesta na nacitanie jedneho obrázka
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     lower_hue = np.array([0, 0, 0])
