@@ -85,58 +85,58 @@ def Analyzer(minor_min, minor_max):
                         counter += 1
                                                                                 #podmienky posunu x a y súradnice podľa toho ako sa načítajú obrázky
                         if counter_image == 1:
-                            y = y /2
-                            x = x/2
+                            y = y / 2
+                            x = x / 2
                         elif counter_image == 2:
-                            y = y/2 + 1024
+                            y = y / 2 + 1024
                             x = x / 2
                         elif counter_image == 3:
-                            y = y/2 + 1024*2
+                            y = y / 2 + 1024 * 2
                             x = x / 2
                         elif counter_image == 4:
-                            y = y/2 + 1024*3
+                            y = y / 2 + 1024 * 3
                             x = x / 2
                         elif counter_image == 5:
-                            y = y/2 + 1024*4
+                            y = y / 2 + 1024 * 4
                             x = x / 2
                         elif counter_image == 6:
-                            y = y/2 + 1024*5
+                            y = y / 2 + 1024 * 5
                             x = x / 2
                         elif counter_image == 7:
-                            y = y/2 + 1024*6
+                            y = y / 2 + 1024 * 6
                             x = x / 2
                         elif counter_image == 8:
-                            y = y/2 + 1024*7
+                            y = y / 2 + 1024 * 7
                             x = x / 2
                         elif counter_image == 9:
-                            y = y/2 + 1024*8
+                            y = y / 2 + 1024 * 8
                             x = x / 2
                         elif counter_image == 10:
-                            y = y/2 + 1024*9
+                            y = y / 2 + 1024 * 9
                             x = x / 2
                         elif counter_image == 11:
-                            y = y/2 + 1024*9
-                            x = x/2 + 1280
+                            y = y / 2 + 1024 * 9
+                            x = x / 2 + 1280
                         elif counter_image == 12:
-                            y = y/2 + 1024*8
+                            y = y / 2 + 1024 * 8
                             x = x / 2 + 1280
                         elif counter_image == 13:
-                            y = y/2 + 1024*7
+                            y = y / 2 + 1024 * 7
                             x = x / 2 + 1280
                         elif counter_image == 14:
-                            y = y/2 + 1024 * 6
+                            y = y / 2 + 1024 * 6
                             x = x / 2 + 1280
                         elif counter_image == 15:
-                            y = y/2 + 1024 * 5
+                            y = y / 2 + 1024 * 5
                             x = x / 2 + 1280
                         elif counter_image == 16:
-                            y = y/2 + 1024 * 4
+                            y = y / 2 + 1024 * 4
                             x = x / 2 + 1280
                         elif counter_image == 17:
-                            y = y/2 + 1024 * 3
+                            y = y / 2 + 1024 * 3
                             x = x / 2 + 1280
                         elif counter_image == 18:
-                            y = y/2 + 1024 * 2
+                            y = y / 2 + 1024 * 2
                             x = x / 2 + 1280
                         elif counter_image == 19:
                             y = y / 2 + 1024 * 1
@@ -146,7 +146,7 @@ def Analyzer(minor_min, minor_max):
                             x = x / 2 + 1280
                         elif counter_image == 21:
                             y = y / 2
-                            x = x / 2 + 1280*2
+                            x = x / 2 + 1280 * 2
                         elif counter_image == 22:
                             y = y / 2 + 1024
                             x = x / 2 + 1280 * 2
@@ -339,7 +339,9 @@ def Analyzer(minor_min, minor_max):
     plt.xlim([3, 30])
     plt.xlabel('Velkost vedlajsej osi')
     plt.ylabel('Pocet objektov')
+    plt.savefig(f'histogram_{dir_path}.png')
     plt.show()
+
 
     with open(f'ellipse_cordinates_{dir_path}', 'w',  newline='') as csvfile:                   #vytvorenie csv suboru zo vsetkych najdenych parametrov
         writer = csv.writer(csvfile)
