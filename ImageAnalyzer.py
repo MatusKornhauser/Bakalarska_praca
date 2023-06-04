@@ -45,11 +45,10 @@ def Analyzer(minor_min, minor_max):
             img_grey = cv2.flip(img_grey, 0)
             gray = cv2.cvtColor(img_flip, cv2.COLOR_BGR2GRAY)
             blur = cv2.bilateralFilter(gray, 8, 80, 80)                 #vytvotrenie rozmazanej fotky
-            ret = cv2.threshold(blur, 124, 255, cv2.THRESH_BINARY_INV)[1]   #vytvotrenie masky
+            ret = cv2.threshold(blur, 127, 255, cv2.THRESH_BINARY_INV)[1]   #vytvotrenie masky
             counter_image += 1
             contour, _ = cv2.findContours(ret, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)   #nájdenie vsetkých kontúr na obrázku
             _, mask = cv2.threshold(img_grey, 124, 255, cv2.THRESH_BINARY_INV)
-            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
             for c in contour:                                                                   #for cyklus ktorý prechádza kazdú kontúru
                 if len(c) >= 5:
@@ -84,252 +83,37 @@ def Analyzer(minor_min, minor_max):
                             minor_axes.append(minor / 2)
                         counter += 1
                                                                                 #podmienky posunu x a y súradnice podľa toho ako sa načítajú obrázky
-                        if counter_image == 1:
-                            y = y / 2
+                        if counter_image <= 10:
+                            y = y / 2 + 1024 * (counter_image - 1)
                             x = x / 2
-                        elif counter_image == 2:
-                            y = y / 2 + 1024
-                            x = x / 2
-                        elif counter_image == 3:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2
-                        elif counter_image == 4:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2
-                        elif counter_image == 5:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2
-                        elif counter_image == 6:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2
-                        elif counter_image == 7:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2
-                        elif counter_image == 8:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2
-                        elif counter_image == 9:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2
-                        elif counter_image == 10:
-                            y = y / 2 + 1024 * 9
-                            x = x / 2
-                        elif counter_image == 11:
-                            y = y / 2 + 1024 * 9
+                        elif counter_image <= 20:
+                            y = y / 2 + 1024 * (counter_image - 11)
                             x = x / 2 + 1280
-                        elif counter_image == 12:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280
-                        elif counter_image == 13:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280
-                        elif counter_image == 14:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280
-                        elif counter_image == 15:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280
-                        elif counter_image == 16:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280
-                        elif counter_image == 17:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280
-                        elif counter_image == 18:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280
-                        elif counter_image == 19:
-                            y = y / 2 + 1024 * 1
-                            x = x / 2 + 1280
-                        elif counter_image == 20:
-                            y = y / 2
-                            x = x / 2 + 1280
-                        elif counter_image == 21:
-                            y = y / 2
+                        elif counter_image <= 30:
+                            y = y / 2 + 1024 * (counter_image - 21)
                             x = x / 2 + 1280 * 2
-                        elif counter_image == 22:
-                            y = y / 2 + 1024
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 23:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 24:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 25:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 26:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 27:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 28:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 29:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 30:
-                            y = y / 2 + 1024 * 9
-                            x = x / 2 + 1280 * 2
-                        elif counter_image == 31:
-                            y = y / 2 + 1024 * 9
+                        elif counter_image <= 40:
+                            y = y / 2 + 1024 * (counter_image - 31)
                             x = x / 2 + 1280 * 3
-                        elif counter_image == 32:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 33:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 34:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 35:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 36:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 37:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 38:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 39:
-                            y = y / 2 + 1024 * 1
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 40:
-                            y = y / 2
-                            x = x / 2 + 1280 * 3
-                        elif counter_image == 41:
-                            y = y / 2
+                        elif counter_image <= 50:
+                            y = y / 2 + 1024 * (counter_image - 41)
                             x = x / 2 + 1280 * 4
-                        elif counter_image == 42:
-                            y = y / 2 + 1024
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 43:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 44:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 45:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 46:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 47:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 48:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 49:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 50:
-                            y = y / 2 + 1024 * 9
-                            x = x / 2 + 1280 * 4
-                        elif counter_image == 51:
-                            y = y / 2 + 1024 * 9
+                        elif counter_image <= 60:
+                            y = y / 2 + 1024 * (counter_image - 51)
                             x = x / 2 + 1280 * 5
-                        elif counter_image == 52:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 53:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 54:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 55:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 56:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 57:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 58:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 59:
-                            y = y / 2 + 1024 * 1
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 60:
-                            y = y / 2
-                            x = x / 2 + 1280 * 5
-                        elif counter_image == 61:
-                            y = y / 2
+                        elif counter_image <= 70:
+                            y = y / 2 + 1024 * (counter_image - 61)
                             x = x / 2 + 1280 * 6
-                        elif counter_image == 62:
-                            y = y / 2 + 1024
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 63:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 64:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 65:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 66:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 67:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 68:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 69:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 70:
-                            y = y / 2 + 1024 * 9
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 71:
-                            y = y / 2 + 1024 * 9
+                        else:
+                            y = y / 2 + 1024 * (counter_image - 71)
                             x = x / 2 + 1280 * 7
-                        elif counter_image == 72:
-                            y = y / 2 + 1024 * 8
-                            x = x / 2 + 1280 * 7
-                        elif counter_image == 73:
-                            y = y / 2 + 1024 * 7
-                            x = x / 2 + 1280 * 7
-                        elif counter_image == 74:
-                            y = y / 2 + 1024 * 6
-                            x = x / 2 + 1280 * 7
-                        elif counter_image == 75:
-                            y = y / 2 + 1024 * 5
-                            x = x / 2 + 1280 * 7
-                        elif counter_image == 76:
-                            y = y / 2 + 1024 * 4
-                            x = x / 2 + 1280 * 7
-                        elif counter_image == 77:
-                            y = y / 2 + 1024 * 3
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 78:
-                            y = y / 2 + 1024 * 2
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 79:
-                            y = y / 2 + 1024 * 1
-                            x = x / 2 + 1280 * 6
-                        elif counter_image == 80:
-                            y = y / 2
-                            x = x / 2 + 1280 * 6
+
                         y_append.append(y)
                         x_append.append(x)
                         minor_append.append(minor/2)
                         major_append.append(major/2)
                         angle_append.append(angle)
-                    elif minor > (minor_max * 2) and minor < (minor_min * 2) or major >= 0 and minor >= 0:              #else podmienka, kde sa vykreslia všetky zamietnuté cervenou farbou
+                    elif minor > (minor_max * 2) and minor < (minor_min * 2) or major >= 0 and minor >= 0:  # else podmienka, kde sa vykreslia všetky zamietnuté cervenou farbou
                         cv2.ellipse(img_flip, ellipse, (0, 0, 255), 2)
 
     counter_p.append(counter)
@@ -342,8 +126,7 @@ def Analyzer(minor_min, minor_max):
     plt.savefig(f'histogram_{dir_path}.png')
     plt.show()
 
-
-    with open(f'ellipse_cordinates_{dir_path}', 'w',  newline='') as csvfile:                   #vytvorenie csv suboru zo vsetkych najdenych parametrov
+    with open(f'ellipse_coordinatesskuska_{dir_path}', 'w',  newline='') as csvfile:                   #vytvorenie csv suboru zo vsetkych najdenych parametrov
         writer = csv.writer(csvfile)
         writer.writerow(header)
         for value in range(len(x_append)):
@@ -362,41 +145,39 @@ if __name__ == '__main__':
     main()
 
 """
+copy = img_flip.copy()
 contours, _ = cv2.findContours(ret, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)                             #zakomentovaný záplavový filter
 
-    idx = np.argmax([cv2.contourArea(cnt) for cnt in contours])
-    cnt = contours[idx]
+                        idx = np.argmax([cv2.contourArea(cnt) for cnt in contours])
+                        cnt = contours[idx]
 
-    thresh1 = cv2.fillPoly(ret, np.int32([cnt]),(255, 255, 255)) #Bug with fillPoly, needs explict cast to 32bit
-    kernel = np.ones((0, 0), np.uint8)
-    opening = cv2.morphologyEx(thresh1, cv2.MORPH_ELLIPSE, kernel, iterations=4)
-    background = cv2.dilate(opening, kernel, iterations=5)
+                        thresh1 = cv2.fillPoly(ret, np.int32([cnt]),
+                                               (255, 255, 255))  # Bug with fillPoly, needs explict cast to 32bit
+                        kernel = np.ones((0, 0), np.uint8)
+                        opening = cv2.morphologyEx(thresh1, cv2.MORPH_ELLIPSE, kernel, iterations=4)
+                        background = cv2.dilate(opening, kernel, iterations=5)
 
-    dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5, dstType=cv2.CV_32F)
-    _, foreground = cv2.threshold(dst, 0.2 * dst.max(), 255, cv2.THRESH_BINARY)
-    foreground = np.uint8(foreground)
-    unknown = cv2.subtract(background, foreground)
+                        dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5, dstType=cv2.CV_32F)
+                        _, foreground = cv2.threshold(dst, 0.6 * dst.max(), 255, cv2.THRESH_BINARY)
+                        foreground = np.uint8(foreground)
+                        unknown = cv2.subtract(background, foreground)
 
-    _, markers = cv2.connectedComponents(foreground)
-    markers += 1
-    markers[unknown == 255] = 0
+                        _, markers = cv2.connectedComponents(foreground)
+                        markers += 1
+                        markers[unknown == 255] = 0
 
-    thresh = cv2.cvtColor(thresh1, cv2.COLOR_GRAY2BGR)
-    markers = cv2.watershed(thresh, markers)
+                        thresh = cv2.cvtColor(thresh1, cv2.COLOR_GRAY2BGR)
+                        markers = cv2.watershed(thresh, markers)
 
-    markers = cv2.normalize(
-        markers, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U
-    )
-    _,thresh = cv2.threshold(markers, 9, 255, cv2.THRESH_BINARY_INV)
-    contours, _ = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    for c in contours:
-        if len(c) >= 6:
-            ellipse = cv2.fitEllipse(c)
-            (xc, yc), (d1, d2), (angle) = ellipse
-            if minor>60 or minor<70:
-                cv2.ellipse(copy, ellipse, (0, 255, 0), 2)
-            if minor>70:
-                break
-
+                        markers = cv2.normalize(
+                            markers, None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U
+                        )
+                        _, thresh = cv2.threshold(markers, 10, 255, cv2.THRESH_BINARY_INV)
+                        contours, _ = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+                        for c in contours:
+                            if len(c) >= 5:
+                                ellipse = cv2.fitEllipse(c)
+                                (xc, yc), (d1, d2), (angle) = ellipse
+                                if minor >= (minor_max*2) or  minor <= (minor_max*2+20):
+                                    cv2.ellipse(copy, ellipse, (0, 255, 0), 2)
 """
-
