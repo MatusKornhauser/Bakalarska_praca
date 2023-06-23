@@ -1,14 +1,15 @@
 # ImageAnalyzer
 
 ImageAnalyzer, je program, ktorý na snímkach hľadá tvary, nájde ich parametre a označí dané tvary na snímke.
-Predtým ako sa program spustí je potrebné nainštalovať python 3.9 a OpenCV knižnicu pomoco:
+Predtým ako sa program spustí je potrebné nainštalovať python 3.9 a OpenCV knižnicu pomocov:
 ```bash
 pip install opencv-python
 ```
+Ak sa spúšťa program cez linux, je potrebné pozrieť aké verzie pythonu linux podporuje, prípadne treba aktualizovať pip alebo ho nainštalovať. Pri inštalácií OpenCV sa už automaticky inštalujú aj numpy knižnice a iné.
 Týmto krokom sa bude dať spustiť program ImageAnalyzer.
 
 ## Opis kódu
-Na začiatku kódu sú definované všetky premenné, ktoré v kóde vystupú, polia, počítadlá atď.
+Na začiatku kódu sú definované všetky premenné, ktoré v kóde vystupujú, polia, počítadlá atď.
 
 Ďalšou časťou kódu je načítanie sady obrázkov. Tieto obrázky sú zo súboru načítavané podľa dátumu ich vytvorenia.
 ```python
@@ -27,7 +28,7 @@ Potom v poli sorted_files sa nachádzajú zoradené obrázky, ktoré pomocou for
 ```python
 for mod_time, file_name in sorted_files:
 ```
-Pomocou funkcie z opencv dokážeme načítať každý obrázok.
+Pomocou funkcie z OpenCV dokážeme načítať každý obrázok.
 ```python
 file_path = os.path.join(dir_path, file_name) 
 img = cv2.imread(file_path)
@@ -46,7 +47,7 @@ if len(c) >= 5:
 ellipse = cv2.fitEllipse(c)      #prisposobenie kazdeho tvaru na elipsu
 (x, y), (major, minor), (angle) = ellipse #parametre elipsy
 ```
-Pomocou podmienky, ktorá je zároveň zamietacím kritériom v kóde, je potrebné dané nájdené elipsy vykresliť na obrázok zelenou farbou aby sme ich označili ako korektné a zároveň uložiť ich parametre a vypočítať plochu a odtieň sivej. Vytvárame súbor ktorý má názov načítaného priečinku_output čo nám určuje výsledný priečinok v ktorom sa nachádzajú obrázky z vykreslenými elipsami. Obrázok sa uloží pomomcou cv2.imwrite. 
+Pomocou podmienky, ktorá je zároveň zamietacím kritériom v kóde, je potrebné dané nájdené elipsy vykresliť na obrázok zelenou farbou aby sme ich označili ako korektné a zároveň uložiť ich parametre a vypočítať plochu a odtieň sivej. Vytvárame súbor ktorý má názov načítaného_priečinku_output čo nám určuje výsledný priečinok v ktorom sa nachádzajú obrázky s vykreslenými elipsami. Obrázok sa uloží pomocou cv2.imwrite. 
 ```python
 if minor <= (minor_max*2) and minor >=(minor_min*2): 
 cv2.ellipse(img_flip, ellipse, (0, 255, 0), 2)
@@ -78,7 +79,7 @@ elif counter_image <= 20:
 .
 .                            
 ```
-V kóde sa nachádza aj kritérium ktoré zamietne dané stopy. Toto kritérium je nastavené ak je hodnota minor menšia alebo väčšia ako daný rozsah. Tieto stopy sa vykreslia červenou farbou.
+V kóde sa nachádza aj kritérium ktoré zamietne dané stopy. Toto kritérium je nastavené ak je hodnota minor(vedľajšia os) menšia alebo väčšia ako daný rozsah. Tieto stopy sa vykreslia červenou farbou.
 ```python
 elif minor > (minor_max * 2) and minor < (minor_min * 2) or major >= 0 and minor >= 0:  # else podmienka, kde sa vykreslia všetky zamietnuté cervenou farbou
 cv2.ellipse(img_flip, ellipse, (0, 0, 255), 2)                   
@@ -105,7 +106,7 @@ with open(f'ellipse_cordinates_{dir_path}', 'w',  newline='') as csvfile:  #vytv
     writer.writerow(counter_name + counter_p)                    
 ```
 
-Kód má main funkciu v ktorej sú definované minor_min a minor_max, ktoré si užívateľ zvolí podľa toho o aké typy obrázkov sa jedná. Ak sa vyhodnocujú alfa častice, parametere sa nastavia na 3 a 30 ak neutróny tak 4 a 40. Tieto hodnoty nám hovoria o rozsahu daných parametrov. Náslkedne zavoláme metódu Analyzer, ktorá nám spustí daný kód.
+Kód má main funkciu v ktorej sú definované minor_min a minor_max(veľkosť vedľajšej osi max a min), ktoré si užívateľ zvolí podľa toho o aké typy obrázkov sa jedná. Ak sa vyhodnocujú alfa častice, parametere sa nastavia na 3 a 30 ak neutróny tak 4 a 40. Tieto hodnoty nám hovoria o rozsahu daných parametrov. Následne zavoláme metódu Analyzer, ktorá nám spustí daný kód.
 ```python
 def main():                         #main kde volám funkciu Analyzer s parametrami minor_min a minor _max
     minor_min = 4
