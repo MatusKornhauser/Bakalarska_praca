@@ -76,6 +76,11 @@ class ImageAnalyzer:
                             self.grey_append.append(max_val)
                             area = np.pi / 4 * major / 2 * minor / 2                                        #vypocet plochy daneho tvaru
                             self.ellipse_coordinates_area.append(area)
+                            formatted_number = "{:.2f}".format(minor/2)
+                            formatted_number2 = "{:.2f}".format(area)
+                            print("Vedlajsia os:", formatted_number)
+                            print("Odtien sivej:", max_val)
+                            print("Plocha:",formatted_number2)
 
                             if major < minor:
                                 self.minor_axes.append(major / 2)
@@ -120,7 +125,7 @@ class ImageAnalyzer:
         mean = statistics.mean(self.minor_append)
         self.mean_n.append(mean)
         plt.hist(self.minor_axes, bins=130, histtype='step', fill=True)                                         #vykreslenie histogramu
-        plt.xlim([3, 30])
+        plt.xlim([4, 40])
         plt.xlabel('Velkost vedlajsej osi')
         plt.ylabel('Pocet objektov')
         plt.savefig(f'histogram_{dir_path}.png')
@@ -137,13 +142,21 @@ class ImageAnalyzer:
             writer.writerow(self.counter_name + self.counter_p)
 
 
-def main():
+def main():                                                      #main kde volám funkciu Analyzer s parametrami minor_min a minor _max
+    parameter = input("Enter a parameter (ALFA or NEUT): ")
+    if parameter == "ALFA":
+        minor_min = 3
+        minor_max = 30
+    elif parameter == "NEUT":
         minor_min = 4
         minor_max = 40
-        dir_path = "Img0002535"                  #cesta k súboru z ktoreho sa obrazky nacitaju
-        analyzer = ImageAnalyzer(minor_min, minor_max)
-        analyzer.analyze_images(dir_path)
+    else:
+        print("Invalid parameter!")
+        return
+    dir_path = "Img0002535"                  #cesta k súboru z ktoreho sa obrazky nacitaju
+    analyzer = ImageAnalyzer(minor_min, minor_max)
+    analyzer.analyze_images(dir_path)
 
 
-if __name__ == '__main__':     #main kde volám funkciu Analyzer s parametrami minor_min a minor _max
-    main()
+if __name__ == '__main__':
+    main()                                #zavolanie funkcie main
